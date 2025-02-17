@@ -1,0 +1,10 @@
+- route:
+    from:
+      uri: platform-http:/hello
+      steps:
+        - setBody:
+            expression:
+              constant:
+                expression: Hello World
+      parameters:
+        httpMethodRestrict: GET

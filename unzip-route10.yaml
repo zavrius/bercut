@@ -1,0 +1,50 @@
+- route:
+    from:
+      uri: platform-http:/hello
+      steps:
+        - setBody:
+            expression:
+              constant:
+                expression: Hello World
+      parameters:
+        httpMethodRestrict: GET
+- route:
+    from:
+      uri: file:C:/DOCS/LAB/Bercut/inbox
+      steps:
+        - log:
+            message: 'The file haaaaaas beeeeennn found: ${header.CamelFileName}'
+        - toD:
+            uri: direct:unzip
+      parameters:
+        readLock: rename
+- route:
+    from:
+      uri: direct:unzip
+      steps:
+        - to:
+            uri: dataformat:zipFile:unmarshal
+        - toD:
+            uri: file:C:/DOCS/LAB/Bercut/unzipped
+    streamCaching: false
+- route:
+    from:
+      uri: file:C:/DOCS/LAB/Bercut/unzipped?noop=true
+      steps:
+        - log:
+            message: 'Processssssinnnngggg CSV: ${header.CamelFileName}'
+        - to:
+            uri: dataformat:csv:unmarshal
+            description: csv
+        - to:
+            uri: bean:modifyCsv
+            parameters:
+              method: process
+        - to:
+            uri: dataformat:csv:marshal
+            description: csv
+        - toD:
+            uri: file:C:/DOCS/LAB/Bercut/processed
+- beans:
+    - name: modifyCsv
+      type: org.example.ModifyCsvProcessor
