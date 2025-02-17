@@ -1,10 +1,10 @@
 1. 
-#Docker version 27.4.0, build bde2b89
+Docker version 27.4.0, build bde2b89
 docker network create karavan
 docker run -it --rm --name karavan --network karavan -p 51336:8080 ghcr.io/apache/camel-karavan:latest
 http://localhost:51336/
 2. 
-#Финальный скрипт 
+Финальный скрипт 
 PS C:\DOCS\LAB\Bercut> camel run .\unzip-route10.yaml --reload --dep=org.example:modifycsv:1.0
 
 Установил JBang что бы установить Camel
