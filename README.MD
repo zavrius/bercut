@@ -5,7 +5,7 @@ docker run -it --rm --name karavan --network karavan -p 51336:8080 ghcr.io/apach
 http://localhost:51336/
 
 2. 
-Финальный скрипт 
+Финальный скрипт
 PS C:\DOCS\LAB\Bercut> camel run .\unzip-route10.yaml --reload --dep=org.example:modifycsv:1.0
 
 Установил JBang что бы установить Camel
